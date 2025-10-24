@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="XZReportButtons" owl="1">
+        <div class="control-buttons">
+            <div class="control-button" t-on-click="onClickXReport">
+                <i class="fa fa-file-text-o"/>
+                <span>X Report</span>
+            </div>
+            <div class="control-button" t-on-click="onClickZReport">
+                <i class="fa fa-file-text"/>
+                <span>Z Report</span>
+            </div>
+        </div>
+    </t>
+</templates>

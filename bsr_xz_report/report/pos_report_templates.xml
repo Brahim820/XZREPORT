@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Z Report View -->
+        <record id="view_pos_report_z_form" model="ir.ui.view">
+            <field name="name">pos.report.z.form</field>
+            <field name="model">pos.report.z</field>
+            <field name="arch" type="xml">
+                <form string="Z Report">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="session_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="total_sales"/>
+                            <field name="total_payments"/>
+                            <field name="total_taxes"/>
+                            <field name="total_discounts"/>
+                            <field name="total_returns"/>
+                            <field name="net_sales"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Report Actions -->
+        <report
+            id="action_report_pos_x"
+            model="pos.session"
+            string="X Report"
+            report_type="qweb-pdf"
+            name="bsr_xz_report.report_pos_x"
+            file="bsr_xz_report.report_pos_x"
+        />
+
+        <report
+            id="action_report_pos_z"
+            model="pos.report.z"
+            string="Z Report"
+            report_type="qweb-pdf"
+            name="bsr_xz_report.report_pos_z"
+            file="bsr_xz_report.report_pos_z"
+        />
+
+        <!-- X Report Template -->
+        <template id="report_pos_x">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h1>X Report</h1>
+                            <!-- X report logic is not fully implemented in this version -->
+                            <p>This is a placeholder for the X report.</p>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <!-- Z Report Template -->
+        <template id="report_pos_z">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h1>Z Report</h1>
+                            <p><strong>Session:</strong> <span t-field="doc.session_id.name"/></p>
+                            <p><strong>Start Date:</strong> <span t-field="doc.start_date"/></p>
+                            <p><strong>End Date:</strong> <span t-field="doc.end_date"/></p>
+                            <hr/>
+                            <p><strong>Total Sales:</strong> <span t-field="doc.total_sales"/></p>
+                            <p><strong>Total Payments:</strong> <span t-field="doc.total_payments"/></p>
+                            <p><strong>Total Taxes:</strong> <span t-field="doc.total_taxes"/></p>
+                            <p><strong>Total Discounts:</strong> <span t-field="doc.total_discounts"/></p>
+                            <p><strong>Total Returns:</strong> <span t-field="doc.total_returns"/></p>
+                            <p><strong>Net Sales:</strong> <span t-field="doc.net_sales"/></p>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
