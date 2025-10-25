@@ -3,6 +3,9 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 import json
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class PosReportZ(models.Model):
     _name = 'pos.report.z'
@@ -98,13 +101,16 @@ class PosSession(models.Model):
     def action_pos_session_closing_control(self):
         res = super(PosSession, self).action_pos_session_closing_control()
         for session in self:
-            if not self.env['pos.report.z'].search([('session_id', '=', session.id)]):
-                orders = session.order_ids
-                financial_data = self._calculate_financial_summary(orders)
-                detailed_data = self._calculate_detailed_summary(orders)
-                report_data = {**financial_data, **detailed_data}
-                report_data.update({'session_id': session.id, 'name': _("Z Report - %s") % session.name})
-                self.env['pos.report.z'].create(report_data)
+            try:
+                if not self.env['pos.report.z'].search([('session_id', '=', session.id)]):
+                    orders = session.order_ids
+                    financial_data = self._calculate_financial_summary(orders)
+                    detailed_data = self._calculate_detailed_summary(orders)
+                    report_data = {**financial_data, **detailed_data}
+                    report_data.update({'session_id': session.id, 'name': _("Z Report - %s") % session.name})
+                    self.env['pos.report.z'].create(report_data)
+            except Exception as e:
+                _logger.error("Could not create Z Report for session %s: %s", session.name, e)
         return res
 
     def _prepare_backend_preview_vals(self, data):
