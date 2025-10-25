@@ -98,8 +98,8 @@ class PosSession(models.Model):
         report = self.env['pos.report.x'].create(report_data)
         return self.env.ref('bsr_xz_report.action_report_pos_x').report_action(report)
 
-    def action_pos_session_closing_control(self):
-        res = super(PosSession, self).action_pos_session_closing_control()
+    def action_pos_session_closing_control(self, **kwargs):
+        res = super(PosSession, self).action_pos_session_closing_control(**kwargs)
         for session in self:
             try:
                 if not self.env['pos.report.z'].search([('session_id', '=', session.id)]):
