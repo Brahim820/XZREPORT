@@ -155,3 +155,38 @@ class PosSession(models.Model):
 
         # We need to use a different report action that points to the correct model
         return self.env.ref('bsr_xz_report.action_report_pos_z_permanent').report_action(report)
+
+    def get_x_report_data(self):
+        """ Returns a JSON dictionary with the data for the X-Report preview. """
+        self.ensure_one()
+        orders = self.order_ids
+        report_data = self._calculate_financial_summary(orders)
+
+        # Add extra info for the preview popup
+        report_data['session_name'] = self.name
+        report_data['currency_symbol'] = self.currency_id.symbol
+        report_data['report_title'] = _("X Report - %s") % self.name
+        report_data['report_date'] = fields.Datetime.now()
+        report_data['is_z_report'] = False
+        return report_data
+
+    def get_z_report_data(self):
+        """ Returns a JSON dictionary with the data for the Z-Report preview. """
+        self.ensure_one()
+        orders = self.order_ids
+        financial_data = self._calculate_financial_summary(orders)
+        detailed_data = self._calculate_detailed_summary(orders)
+
+        report_data = {**financial_data, **detailed_data}
+
+        # Add extra info for the preview popup
+        report_data['session_name'] = self.name
+        report_data['currency_symbol'] = self.currency_id.symbol
+        report_data['report_title'] = _("Z Report - %s") % self.name
+        report_data['report_date'] = fields.Datetime.now()
+        report_data['is_z_report'] = True
+
+        # Decode the JSON fields to be sent as a structured dictionary
+        report_data['payment_details'] = json.loads(report_data['payment_details'])
+        report_data['category_details'] = json.loads(report_data['category_details'])
+        return report_data

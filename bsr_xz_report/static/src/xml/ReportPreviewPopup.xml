@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="ReportPreviewPopup" owl="1">
+        <div role="dialog" class="modal-dialog">
+            <div class="popup popup-receipt">
+                <header class="title">
+                    <t t-esc="props.title || 'Report Preview'"/>
+                </header>
+                <main class="body" style="max-height: 60vh; overflow-y: auto; font-family: 'Lucida Console', Monaco, monospace; font-size: 12px;">
+                    <!-- Header -->
+                    <div style="text-align: center;">
+                        <h2 style="margin: 0;"><t t-esc="props.data.report_title"/></h2>
+                        <p style="margin: 0;"><strong>Session:</strong> <t t-esc="props.data.session_name"/></p>
+                        <p style="margin: 0;"><strong>Report Date:</strong> <t t-esc="getFormattedDate(props.data.report_date)"/></p>
+                    </div>
+
+                    <!-- Financial Summary -->
+                    <hr/>
+                    <table style="width: 100%;">
+                        <tr><td>Total Sales:</td><td style="text-align: right;"><t t-esc="formatCurrency(props.data.total_sales)"/></td></tr>
+                        <tr><td>Total Returns:</td><td style="text-align: right;"><t t-esc="formatCurrency(props.data.total_returns)"/></td></tr>
+                        <tr><td>Net Sales:</td><td style="text-align: right;"><t t-esc="formatCurrency(props.data.net_sales)"/></td></tr>
+                        <tr><td>Total Taxes:</td><td style="text-align: right;"><t t-esc="formatCurrency(props.data.total_taxes)"/></td></tr>
+                        <tr><td>Total Discounts:</td><td style="text-align: right;"><t t-esc="formatCurrency(props.data.total_discounts)"/></td></tr>
+                    </table>
+
+                    <!-- Payment Details (only for Z report) -->
+                    <t t-if="props.data.is_z_report">
+                        <hr/>
+                        <h4 style="margin: 10px 0 5px 0; text-align: center;">Payment Summary</h4>
+                        <table style="width: 100%;">
+                            <t t-foreach="props.data.payment_details" t-as="p" t-key="p.name">
+                                <tr>
+                                    <td><t t-esc="p.name"/></td>
+                                    <td style="text-align: right;"><t t-esc="formatCurrency(p.amount)"/></td>
+                                </tr>
+                            </t>
+                            <tr style="border-top: 1px solid black;"><td style="padding-top: 5px;"><strong>Total Payments:</strong></td><td style="padding-top: 5px; text-align: right;"><strong><t t-esc="formatCurrency(props.data.total_payments)"/></strong></td></tr>
+                        </table>
+                    </t>
+
+                    <!-- Category Details (only for Z report) -->
+                    <t t-if="props.data.is_z_report">
+                        <hr/>
+                        <h4 style="margin: 10px 0 5px 0; text-align: center;">Category Summary</h4>
+                        <table style="width: 100%;">
+                             <tr style="border-bottom: 1px solid black; text-align: left;">
+                                <th style="padding-bottom: 3px;">Category</th>
+                                <th style="padding-bottom: 3px; text-align: center;">Qty</th>
+                                <th style="padding-bottom: 3px; text-align: right;">Amount</th>
+                            </tr>
+                            <t t-foreach="props.data.category_details" t-as="c" t-key="c.name">
+                                <tr>
+                                    <td><t t-esc="c.name"/></td>
+                                    <td style="text-align: center;"><t t-esc="c.qty"/></td>
+                                    <td style="text-align: right;"><t t-esc="formatCurrency(c.amount)"/></td>
+                                </tr>
+                            </t>
+                        </table>
+                    </t>
+
+                    <!-- Item Count (only for Z report) -->
+                    <t t-if="props.data.is_z_report">
+                         <hr/>
+                         <p style="text-align: center;"><strong>Total Items Sold:</strong> <t t-esc="props.data.total_items"/></p>
+                    </t>
+
+                </main>
+                <footer class="footer">
+                    <div class="button confirm" t-on-click="printReport">
+                        <t t-esc="props.confirmText" />
+                    </div>
+                    <div class="button cancel" t-on-click="cancel">
+                        <t t-esc="props.cancelText" />
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </t>
+
+</templates>

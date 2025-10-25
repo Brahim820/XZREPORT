@@ -23,42 +23,71 @@ odoo.define('bsr_xz_report.pos_xz_report', function (require) {
             return this.env._t('Z Report');
         }
 
-        async onClickXReport() {
+        // The old PDF generation methods, now triggered from the popup
+        async _printReport(is_z_report) {
             const session_id = this.env.pos.pos_session.id;
+            const method = is_z_report ? 'generate_z_report' : 'generate_x_report';
             try {
                 const report_action = await rpc.query({
                     model: 'pos.session',
-                    method: 'generate_x_report',
+                    method: method,
                     args: [[session_id]],
                 });
                 if (report_action) {
                     this.env.pos.do_action(report_action);
                 }
             } catch (error) {
-                this.showPopup('ErrorPopup', {
-                    title: this.env._t('X Report Error'),
-                    body: this.env._t('Could not generate the X report.'),
+                const title = is_z_report ? this.env._t('Z Report Error') : this.env._t('X Report Error');
+                const body = is_z_report ? this.env._t('Could not generate the Z report.') : this.env._t('Could not generate the X report.');
+                this.showPopup('ErrorPopup', { title, body });
+            }
+        }
+
+        // New methods to show the preview popup
+        async onClickXReport() {
+            const reportData = await this._fetchReportData(false);
+            if (reportData) {
+                this.showPopup('ReportPreviewPopup', {
+                    title: this.env._t('X Report Preview'),
+                    data: reportData,
+                    confirm: (event) => this._onPrintReport(event)
                 });
             }
         }
 
         async onClickZReport() {
-            const session_id = this.env.pos.pos_session.id;
-            try {
-                const report_action = await rpc.query({
-                    model: 'pos.session',
-                    method: 'generate_z_report',
-                    args: [[session_id]],
-                });
-                if (report_action) {
-                    this.env.pos.do_action(report_action);
-                }
-            } catch (error) {
-                this.showPopup('ErrorPopup', {
-                    title: this.env._t('Z Report Error'),
-                    body: this.env._t('Could not generate the Z report.'),
+            const reportData = await this._fetchReportData(true);
+            if (reportData) {
+                this.showPopup('ReportPreviewPopup', {
+                    title: this.env._t('Z Report Preview'),
+                    data: reportData
+                }).then(({ confirmed, payload }) => {
+                    if (confirmed && payload.is_z_report !== undefined) {
+                        this._printReport(payload.is_z_report);
+                    }
                 });
             }
+        }
+
+        async _fetchReportData(is_z_report) {
+            const session_id = this.env.pos.pos_session.id;
+            const method = is_z_report ? 'get_z_report_data' : 'get_x_report_data';
+            try {
+                return await rpc.query({
+                    model: 'pos.session',
+                    method: method,
+                    args: [[session_id]],
+                });
+            } catch (error) {
+                const title = is_z_report ? this.env._t('Z Report Error') : this.env._t('X Report Error');
+                const body = is_z_report ? this.env._t('Could not fetch Z report data.') : this.env._t('Could not fetch X report data.');
+                this.showPopup('ErrorPopup', { title, body });
+                return null;
+            }
+        }
+
+        _onPrintReport({ detail }) {
+             this._printReport(detail.is_z_report);
         }
     }
     XZReportButtons.template = 'XZReportButtons';
