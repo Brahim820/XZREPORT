@@ -59,22 +59,36 @@ class PosSession(models.Model):
         }
 
     def generate_z_report(self):
+        """ This method is called from the POS frontend.
+        It prints the Z Report of the LAST CLOSED session for the current PoS config.
+        """
         self.ensure_one()
-        report = self.env['pos.report.z'].search([('session_id', '=', self.id)], limit=1)
-        report_data = self._calculate_report_data()
+        config_id = self.config_id.id
 
-        if report:
-            report.write(report_data)
-        else:
+        last_closed_session = self.search([
+            ('config_id', '=', config_id),
+            ('state', '=', 'closed')
+        ], order='stop_at desc', limit=1)
+
+        if not last_closed_session:
+            raise UserError(_("No closed session found for this Point of Sale."))
+
+        report = self.env['pos.report.z'].search([('session_id', '=', last_closed_session.id)], limit=1)
+        if not report:
+            # If the report was not created on closing, create it now
+            report_data = last_closed_session._calculate_report_data()
             report_data.update({
-                'session_id': self.id,
-                'name': _("Z Report - %s") % self.name,
+                'session_id': last_closed_session.id,
+                'name': _("Z Report - %s") % last_closed_session.name,
             })
             report = self.env['pos.report.z'].create(report_data)
 
         return self.env.ref('bsr_xz_report.action_report_pos_z').report_action(report)
 
     def generate_x_report(self):
+        """ This method is called from the POS frontend.
+        It prints the X Report for the CURRENTLY OPEN session.
+        """
         self.ensure_one()
         report_data = self._calculate_report_data()
         report_data.update({
@@ -84,3 +98,17 @@ class PosSession(models.Model):
 
         report = self.env['pos.report.x'].create(report_data)
         return self.env.ref('bsr_xz_report.action_report_pos_x').report_action(report)
+
+    def action_pos_session_closing_control(self):
+        """ Inherited to automatically create the Z Report on session closing. """
+        res = super(PosSession, self).action_pos_session_closing_control()
+        for session in self:
+            report = self.env['pos.report.z'].search([('session_id', '=', session.id)], limit=1)
+            if not report:
+                report_data = session._calculate_report_data()
+                report_data.update({
+                    'session_id': session.id,
+                    'name': _("Z Report - %s") % session.name,
+                })
+                self.env['pos.report.z'].create(report_data)
+        return res

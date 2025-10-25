@@ -48,6 +48,7 @@
 
         <!-- Shared Receipt Style Template -->
         <template id="report_receipt_layout">
+            <meta charset="utf-8"/>
             <t t-set="o" t-value="doc.with_context(lang=doc.session_id.user_id.lang)"/>
             <div class="page" style="font-family: 'Lucida Console', Monaco, monospace; font-size: 12px; max-width: 80mm; margin: 0; padding: 10px;">
                 <div style="text-align: center;">
