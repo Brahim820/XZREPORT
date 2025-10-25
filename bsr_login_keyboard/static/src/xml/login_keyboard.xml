@@ -2,7 +2,8 @@
 <templates xml:space="preserve">
     <t t-name="bsr_login_keyboard.keyboard_template">
         <div class="keyboard">
-            <div class="keyboard-row">
+            <!-- Number and Symbol Row -->
+            <div class="keyboard-row symbols">
                 <div class="keyboard-key" data-key="1">1</div>
                 <div class="keyboard-key" data-key="2">2</div>
                 <div class="keyboard-key" data-key="3">3</div>
@@ -13,39 +14,50 @@
                 <div class="keyboard-key" data-key="8">8</div>
                 <div class="keyboard-key" data-key="9">9</div>
                 <div class="keyboard-key" data-key="0">0</div>
+                <div class="keyboard-key" data-key="@">@</div>
+                <div class="keyboard-key" data-key=".">.</div>
+                <div class="keyboard-key" data-key="_">_</div>
+                <div class="keyboard-key" data-key="-">-</div>
             </div>
+
+            <!-- Top Letter Row (QWERTY) -->
             <div class="keyboard-row">
-                <div class="keyboard-key" data-key="q">q</div>
-                <div class="keyboard-key" data-key="w">w</div>
-                <div class="keyboard-key" data-key="e">e</div>
-                <div class="keyboard-key" data-key="r">r</div>
-                <div class="keyboard-key" data-key="t">t</div>
-                <div class="keyboard-key" data-key="y">y</div>
-                <div class="keyboard-key" data-key="u">u</div>
-                <div class="keyboard-key" data-key="i">i</div>
-                <div class="keyboard-key" data-key="o">o</div>
-                <div class="keyboard-key" data-key="p">p</div>
+                <div class="keyboard-key lower" data-key="q">q</div><div class="keyboard-key upper" data-key="Q" style="display:none;">Q</div>
+                <div class="keyboard-key lower" data-key="w">w</div><div class="keyboard-key upper" data-key="W" style="display:none;">W</div>
+                <div class="keyboard-key lower" data-key="e">e</div><div class="keyboard-key upper" data-key="E" style="display:none;">E</div>
+                <div class="keyboard-key lower" data-key="r">r</div><div class="keyboard-key upper" data-key="R" style="display:none;">R</div>
+                <div class="keyboard-key lower" data-key="t">t</div><div class="keyboard-key upper" data-key="T" style="display:none;">T</div>
+                <div class="keyboard-key lower" data-key="y">y</div><div class="keyboard-key upper" data-key="Y" style="display:none;">Y</div>
+                <div class="keyboard-key lower" data-key="u">u</div><div class="keyboard-key upper" data-key="U" style="display:none;">U</div>
+                <div class="keyboard-key lower" data-key="i">i</div><div class="keyboard-key upper" data-key="I" style="display:none;">I</div>
+                <div class="keyboard-key lower" data-key="o">o</div><div class="keyboard-key upper" data-key="O" style="display:none;">O</div>
+                <div class="keyboard-key lower" data-key="p">p</div><div class="keyboard-key upper" data-key="P" style="display:none;">P</div>
             </div>
+
+            <!-- Middle Letter Row (ASDF) -->
             <div class="keyboard-row">
-                <div class="keyboard-key" data-key="a">a</div>
-                <div class="keyboard-key" data-key="s">s</div>
-                <div class="keyboard-key" data-key="d">d</div>
-                <div class="keyboard-key" data-key="f">f</div>
-                <div class="keyboard-key" data-key="g">g</div>
-                <div class="keyboard-key" data-key="h">h</div>
-                <div class="keyboard-key" data-key="j">j</div>
-                <div class="keyboard-key" data-key="k">k</div>
-                <div class="keyboard-key" data-key="l">l</div>
+                <div class="keyboard-key lower" data-key="a">a</div><div class="keyboard-key upper" data-key="A" style="display:none;">A</div>
+                <div class="keyboard-key lower" data-key="s">s</div><div class="keyboard-key upper" data-key="S" style="display:none;">S</div>
+                <div class="keyboard-key lower" data-key="d">d</div><div class="keyboard-key upper" data-key="D" style="display:none;">D</div>
+                <div class="keyboard-key lower" data-key="f">f</div><div class="keyboard-key upper" data-key="F" style="display:none;">F</div>
+                <div class="keyboard-key lower" data-key="g">g</div><div class="keyboard-key upper" data-key="G" style="display:none;">G</div>
+                <div class="keyboard-key lower" data-key="h">h</div><div class="keyboard-key upper" data-key="H" style="display:none;">H</div>
+                <div class="keyboard-key lower" data-key="j">j</div><div class="keyboard-key upper" data-key="J" style="display:none;">J</div>
+                <div class="keyboard-key lower" data-key="k">k</div><div class="keyboard-key upper" data-key="K" style="display:none;">K</div>
+                <div class="keyboard-key lower" data-key="l">l</div><div class="keyboard-key upper" data-key="L" style="display:none;">L</div>
             </div>
+
+            <!-- Bottom Letter Row (ZXCV) -->
             <div class="keyboard-row">
-                <div class="keyboard-key" data-key="z">z</div>
-                <div class="keyboard-key" data-key="x">x</div>
-                <div class="keyboard-key" data-key="c">c</div>
-                <div class="keyboard-key" data-key="v">v</div>
-                <div class="keyboard-key" data-key="b">b</div>
-                <div class="keyboard-key" data-key="n">n</div>
-                <div class="keyboard-key" data-key="m">m</div>
-                <div class="keyboard-key" data-key="backspace">⌫</div>
+                <div class="keyboard-key shift" data-key="shift">⇧</div>
+                <div class="keyboard-key lower" data-key="z">z</div><div class="keyboard-key upper" data-key="Z" style="display:none;">Z</div>
+                <div class="keyboard-key lower" data-key="x">x</div><div class="keyboard-key upper" data-key="X" style="display:none;">X</div>
+                <div class="keyboard-key lower" data-key="c">c</div><div class="keyboard-key upper" data-key="C" style="display:none;">C</div>
+                <div class="keyboard-key lower" data-key="v">v</div><div class="keyboard-key upper" data-key="V" style="display:none;">V</div>
+                <div class="keyboard-key lower" data-key="b">b</div><div class="keyboard-key upper" data-key="B" style="display:none;">B</div>
+                <div class="keyboard-key lower" data-key="n">n</div><div class="keyboard-key upper" data-key="N" style="display:none;">N</div>
+                <div class="keyboard-key lower" data-key="m">m</div><div class="keyboard-key upper" data-key="M" style="display:none;">M</div>
+                <div class="keyboard-key backspace" data-key="backspace">⌫</div>
             </div>
         </div>
         <style>
@@ -53,31 +65,47 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin-top: 10px;
+                margin-top: 15px;
                 padding: 10px;
-                background-color: #f5f5f5;
-                border-radius: 5px;
+                background-color: #f0f0f0;
+                border-radius: 8px;
+                width: 100%;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
             }
             .keyboard-row {
                 display: flex;
+                justify-content: center;
+                width: 100%;
                 margin-bottom: 5px;
             }
             .keyboard-key {
                 min-width: 40px;
                 height: 40px;
                 border: 1px solid #ccc;
-                display: flex;
+                display: inline-flex;
                 justify-content: center;
                 align-items: center;
                 cursor: pointer;
                 margin: 2px;
-                padding: 0 10px;
+                padding: 0 5px;
                 background-color: #fff;
-                border-radius: 3px;
+                border-radius: 5px;
                 font-size: 16px;
+                font-family: Arial, sans-serif;
+                flex-grow: 1;
+                text-align: center;
             }
-            .keyboard-key[data-key='backspace'] {
-                width: 60px;
+            .keyboard-key:hover {
+                background-color: #e0e0e0;
+            }
+            .shift.active {
+                background-color: #a0d0ff;
+                border-color: #007bff;
+            }
+            .backspace {
+                min-width: 60px;
             }
         </style>
     </t>

@@ -15,8 +15,6 @@
     'assets': {
         'web.assets_frontend': [
             'bsr_login_keyboard/static/src/js/login_keyboard.js',
-        ],
-        'web.assets_qweb': [
             'bsr_login_keyboard/static/src/xml/login_keyboard.xml',
         ],
     },
