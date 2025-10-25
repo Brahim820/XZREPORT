@@ -1,3 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_pos_report_z_user,pos.report.z user,model_pos_report_z,point_of_sale.group_pos_user,1,1,1,1
 access_pos_report_x_user,pos.report.x user,model_pos_report_x,point_of_sale.group_pos_user,1,1,1,1
+access_backend_preview_wizard,bsr.pos.backend.report.preview wizard,model_bsr_pos_backend_report_preview,point_of_sale.group_pos_user,1,1,1,1
+access_backend_payment_line,bsr.pos.backend.payment.line wizard,model_bsr_pos_backend_payment_line,point_of_sale.group_pos_user,1,1,1,1
+access_backend_category_line,bsr.pos.backend.category.line wizard,model_bsr_pos_backend_category_line,point_of_sale.group_pos_user,1,1,1,1

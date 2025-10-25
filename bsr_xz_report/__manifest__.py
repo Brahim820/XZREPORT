@@ -14,6 +14,7 @@
         'report/paper_format.xml',
         'report/pos_report_templates.xml',
         'views/pos_session_view.xml',
+        'views/backend_preview_wizard_view.xml',
     ],
     'installable': True,
     'application': False,
