@@ -13,6 +13,7 @@
         'security/ir.model.access.csv',
         'report/paper_format.xml',
         'report/pos_report_templates.xml',
+        'views/pos_session_view.xml',
     ],
     'installable': True,
     'application': False,

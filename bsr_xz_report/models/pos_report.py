@@ -143,3 +143,15 @@ class PosSession(models.Model):
                 })
                 self.env['pos.report.z'].create(report_data)
         return res
+
+    def print_z_report_backend(self):
+        """ This method is called from the backend session form view.
+        It prints the permanent Z Report associated with the session.
+        """
+        self.ensure_one()
+        report = self.env['pos.report.z'].search([('session_id', '=', self.id)], limit=1)
+        if not report:
+            raise UserError(_("No Z Report has been saved for this session. It is generated upon closing."))
+
+        # We need to use a different report action that points to the correct model
+        return self.env.ref('bsr_xz_report.action_report_pos_z_permanent').report_action(report)

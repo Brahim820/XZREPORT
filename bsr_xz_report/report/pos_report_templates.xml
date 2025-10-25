@@ -22,6 +22,16 @@
             paperformat="bsr_xz_report.paperformat_receipt"
         />
 
+        <report
+            id="action_report_pos_z_permanent"
+            model="pos.report.z"
+            string="Z Report (Backend)"
+            report_type="qweb-pdf"
+            name="bsr_xz_report.report_pos_z_detailed_template"
+            file="bsr_xz_report.report_pos_z_detailed_template"
+            paperformat="bsr_xz_report.paperformat_receipt"
+        />
+
         <!-- X Report Template (Simple Summary) -->
         <template id="report_pos_x_template">
             <t t-call="web.html_container">
@@ -111,15 +121,6 @@
                 </t>
             </t>
         </template>
-
-        <!-- Cleanup old report definition -->
-        <record id="action_report_pos_z" model="ir.actions.report">
-            <field name="name">Z Report (Legacy)</field>
-            <field name="model">pos.report.z</field>
-            <field name="report_type">qweb-pdf</field>
-            <field name="report_name">bsr_xz_report.report_pos_z_detailed_template</field>
-            <field name="report_file">bsr_xz_report.report_pos_z_detailed_template</field>
-        </record>
 
     </data>
 </odoo>
