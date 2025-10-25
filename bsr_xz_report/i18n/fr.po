@@ -1,0 +1,118 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bsr_xz_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-25 04:45+0000\n"
+"PO-Revision-Date: 2025-10-25 04:45+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bsr_xz_report
+#: model:ir.model,name:bsr_xz_report.model_pos_report_x
+msgid "POS X Report (Transient)"
+msgstr "Rapport X du PdV (Temporaire)"
+
+#. module: bsr_xz_report
+#: model:ir.model,name:bsr_xz_report.model_pos_report_z
+msgid "POS Z Report (Permanent)"
+msgstr "Rapport Z du PdV (Permanent)"
+
+#. module: bsr_xz_report
+#: code:addons/bsr_xz_report/models/pos_report.py:0
+#, python-format
+msgid "X Report - %s"
+msgstr "Rapport X - %s"
+
+#. module: bsr_xz_report
+#: code:addons/bsr_xz_report/models/pos_report.py:0
+#, python-format
+msgid "Z Report - %s"
+msgstr "Rapport Z - %s"
+
+#. module: bsr_xz_report
+#: model_terms:ir.ui.view,arch_db:bsr_xz_report.report_receipt_layout
+msgid "Session:"
+msgstr "Session :"
+
+#. module: bsr_xz_report
+#: model_terms:ir.ui.view,arch_db:bsr_xz_report.report_receipt_layout
+msgid "Start:"
+msgstr "Début :"
+
+#. module: bsr_xz_report
+#: model_terms:ir.ui.view,arch_db:bsr_xz_report.report_receipt_layout
+msgid "End:"
+msgstr "Fin :"
+
+#. module: bsr_xz_report
+#: model_terms:ir.ui.view,arch_db:bsr_xz_report.report_receipt_layout
+msgid "Report Date:"
+msgstr "Date du Rapport :"
+
+#. module: bsr_xz_report
+#: model_terms:ir.ui.view,arch_db:bsr_xz_report.report_receipt_layout
+msgid "Total Sales:"
+msgstr "Total des Ventes :"
+
+#. module: bsr_xz_report
+#: model_terms:ir.ui.view,arch_db:bsr_xz_report.report_receipt_layout
+msgid "Total Returns:"
+msgstr "Total des Retours :"
+
+#. module: bsr_xz_report
+#: model_terms:ir.ui.view,arch_db:bsr_xz_report.report_receipt_layout
+msgid "Net Sales:"
+msgstr "Ventes Nettes :"
+
+#. module: bsr_xz_report
+#: model_terms:ir.ui.view,arch_db:bsr_xz_report.report_receipt_layout
+msgid "Total Taxes:"
+msgstr "Total des Taxes :"
+
+#. module: bsr_xz_report
+#: model_terms:ir.ui.view,arch_db:bsr_xz_report.report_receipt_layout
+msgid "Total Discounts:"
+msgstr "Total des Remises :"
+
+#. module: bsr_xz_report
+#: model_terms:ir.ui.view,arch_db:bsr_xz_report.report_receipt_layout
+msgid "Total Payments:"
+msgstr "Total des Paiements :"
+
+#. module: bsr_xz_report
+#: code:addons/bsr_xz_report/static/src/js/pos_xz_report.js:0
+msgid "X Report"
+msgstr "Rapport X"
+
+#. module: bsr_xz_report
+#: code:addons/bsr_xz_report/static/src/js/pos_xz_report.js:0
+msgid "Z Report"
+msgstr "Rapport Z"
+
+#. module: bsr_xz_report
+#: code:addons/bsr_xz_report/static/src/js/pos_xz_report.js:0
+msgid "X Report Error"
+msgstr "Erreur du Rapport X"
+
+#. module: bsr_xz_report
+#: code:addons/bsr_xz_report/static/src/js/pos_xz_report.js:0
+msgid "Could not generate the X report."
+msgstr "Impossible de générer le rapport X."
+
+#. module: bsr_xz_report
+#: code:addons/bsr_xz_report/static/src/js/pos_xz_report.js:0
+msgid "Z Report Error"
+msgstr "Erreur du Rapport Z"
+
+#. module: bsr_xz_report
+#: code:addons/bsr_xz_report/static/src/js/pos_xz_report.js:0
+msgid "Could not generate the Z report. Make sure the session is closed."
+msgstr "Impossible de générer le rapport Z."

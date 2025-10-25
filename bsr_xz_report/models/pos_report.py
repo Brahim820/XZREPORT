@@ -60,27 +60,26 @@ class PosSession(models.Model):
 
     def generate_z_report(self):
         self.ensure_one()
-        if self.state != 'closed':
-            raise UserError(_("You must close the session to generate the Z report."))
-
         report = self.env['pos.report.z'].search([('session_id', '=', self.id)], limit=1)
-        if not report:
-            report_data = self._calculate_report_data()
+        report_data = self._calculate_report_data()
+
+        if report:
+            report.write(report_data)
+        else:
             report_data.update({
                 'session_id': self.id,
-                'name': f"Z Report - {self.name}"
+                'name': _("Z Report - %s") % self.name,
             })
             report = self.env['pos.report.z'].create(report_data)
 
         return self.env.ref('bsr_xz_report.action_report_pos_z').report_action(report)
-
 
     def generate_x_report(self):
         self.ensure_one()
         report_data = self._calculate_report_data()
         report_data.update({
             'session_id': self.id,
-            'name': f"X Report - {self.name}"
+            'name': _("X Report - %s") % self.name,
         })
 
         report = self.env['pos.report.x'].create(report_data)

@@ -6,12 +6,21 @@ odoo.define('bsr_xz_report.pos_xz_report', function (require) {
     const { useListener } = require('web.custom_hooks');
     const Registries = require('point_of_sale.Registries');
     var rpc = require('web.rpc');
+    const { _t } = require('web.core');
 
     class XZReportButtons extends PosComponent {
         constructor() {
             super(...arguments);
             useListener('click-x-report', this.onClickXReport);
             useListener('click-z-report', this.onClickZReport);
+        }
+
+        get xReportText() {
+            return this.env._t('X Report');
+        }
+
+        get zReportText() {
+            return this.env._t('Z Report');
         }
 
         async onClickXReport() {
@@ -47,7 +56,7 @@ odoo.define('bsr_xz_report.pos_xz_report', function (require) {
             } catch (error) {
                 this.showPopup('ErrorPopup', {
                     title: this.env._t('Z Report Error'),
-                    body: this.env._t('Could not generate the Z report. Make sure the session is closed.'),
+                    body: this.env._t('Could not generate the Z report.'),
                 });
             }
         }
