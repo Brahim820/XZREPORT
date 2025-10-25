@@ -17,8 +17,10 @@
     'application': False,
     'auto_install': False,
     'assets': {
-        'point_of_sale.assets': [
+        'web.assets_qweb': [
             'bsr_xz_report/static/src/xml/pos_xz_report_templates.xml',
+        ],
+        'point_of_sale.assets': [
             'bsr_xz_report/static/src/js/pos_xz_report.js',
         ],
     },
