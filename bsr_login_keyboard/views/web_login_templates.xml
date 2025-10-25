@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="login_layout" inherit_id="web.login" name="Login Page Keyboard">
-        <xpath expr="//div[hasclass('clearfix','oe_login_buttons')]" position="before">
-            <div id="keyboard"/>
+        <xpath expr="//button[@type='submit']" position="before">
+            <div id="keyboard" class="mt-3"/>
         </xpath>
     </template>
 </odoo>
