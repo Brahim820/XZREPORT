@@ -44,7 +44,10 @@ class PosReportX(models.TransientModel):
     total_discounts = fields.Float(string='Total Discounts')
     total_payments = fields.Float(string='Total Payments')
 
-    # For X-Report, we only need the financial summary, not the full details.
+    # Detailed Summary (matching Z report for detailed printing)
+    total_items = fields.Integer(string="Total Items Sold")
+    payment_details = fields.Text(string="Payment Details")
+    category_details = fields.Text(string="Category Details")
 
 class PosSession(models.Model):
     _inherit = 'pos.session'
