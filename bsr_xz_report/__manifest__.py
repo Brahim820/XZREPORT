@@ -18,8 +18,8 @@
     'auto_install': False,
     'assets': {
         'point_of_sale.assets': [
-            'bsr_xz_report/static/src/js/pos_xz_report.js',
             'bsr_xz_report/static/src/xml/pos_xz_report_templates.xml',
+            'bsr_xz_report/static/src/js/pos_xz_report.js',
         ],
     },
 }
