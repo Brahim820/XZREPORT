@@ -12,7 +12,6 @@
     'data': [
         'security/ir.model.access.csv',
         'report/pos_report_templates.xml',
-        'views/pos_assets.xml',
     ],
     'installable': True,
     'application': False,

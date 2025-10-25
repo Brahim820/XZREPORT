@@ -15,14 +15,16 @@ odoo.define('bsr_xz_report.pos_xz_report', function (require) {
         }
 
         async onClickXReport() {
+            const session_id = this.env.pos.pos_session.id;
             try {
-                const session_id = this.env.pos.pos_session.id;
-                // This is a placeholder for the X report logic
-                await this.env.pos.do_action('bsr_xz_report.action_report_pos_x', {
-                    additional_context: {
-                        active_ids: [session_id],
-                    },
+                const report_action = await rpc.query({
+                    model: 'pos.session',
+                    method: 'generate_x_report',
+                    args: [[session_id]],
                 });
+                if (report_action) {
+                    this.env.pos.do_action(report_action);
+                }
             } catch (error) {
                 this.showPopup('ErrorPopup', {
                     title: this.env._t('X Report Error'),
@@ -32,19 +34,16 @@ odoo.define('bsr_xz_report.pos_xz_report', function (require) {
         }
 
         async onClickZReport() {
+            const session_id = this.env.pos.pos_session.id;
             try {
-                const session_id = this.env.pos.pos_session.id;
-                await rpc.query({
+                const report_action = await rpc.query({
                     model: 'pos.session',
                     method: 'generate_z_report',
-                    args: [session_id],
+                    args: [[session_id]],
                 });
-
-                 await this.env.pos.do_action('bsr_xz_report.action_report_pos_z', {
-                    additional_context: {
-                        active_ids: [session_id],
-                    },
-                });
+                if (report_action) {
+                    this.env.pos.do_action(report_action);
+                }
             } catch (error) {
                 this.showPopup('ErrorPopup', {
                     title: this.env._t('Z Report Error'),
