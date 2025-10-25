@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="bsr_login_keyboard.keyboard_template">
+        <div class="keyboard">
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-key="1">1</div>
+                <div class="keyboard-key" data-key="2">2</div>
+                <div class="keyboard-key" data-key="3">3</div>
+                <div class="keyboard-key" data-key="4">4</div>
+                <div class="keyboard-key" data-key="5">5</div>
+                <div class="keyboard-key" data-key="6">6</div>
+                <div class="keyboard-key" data-key="7">7</div>
+                <div class="keyboard-key" data-key="8">8</div>
+                <div class="keyboard-key" data-key="9">9</div>
+                <div class="keyboard-key" data-key="0">0</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-key="q">q</div>
+                <div class="keyboard-key" data-key="w">w</div>
+                <div class="keyboard-key" data-key="e">e</div>
+                <div class="keyboard-key" data-key="r">r</div>
+                <div class="keyboard-key" data-key="t">t</div>
+                <div class="keyboard-key" data-key="y">y</div>
+                <div class="keyboard-key" data-key="u">u</div>
+                <div class="keyboard-key" data-key="i">i</div>
+                <div class="keyboard-key" data-key="o">o</div>
+                <div class="keyboard-key" data-key="p">p</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-key="a">a</div>
+                <div class="keyboard-key" data-key="s">s</div>
+                <div class="keyboard-key" data-key="d">d</div>
+                <div class="keyboard-key" data-key="f">f</div>
+                <div class="keyboard-key" data-key="g">g</div>
+                <div class="keyboard-key" data-key="h">h</div>
+                <div class="keyboard-key" data-key="j">j</div>
+                <div class="keyboard-key" data-key="k">k</div>
+                <div class="keyboard-key" data-key="l">l</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-key="z">z</div>
+                <div class="keyboard-key" data-key="x">x</div>
+                <div class="keyboard-key" data-key="c">c</div>
+                <div class="keyboard-key" data-key="v">v</div>
+                <div class="keyboard-key" data-key="b">b</div>
+                <div class="keyboard-key" data-key="n">n</div>
+                <div class="keyboard-key" data-key="m">m</div>
+                <div class="keyboard-key" data-key="backspace">⌫</div>
+            </div>
+        </div>
+        <style>
+            .keyboard {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 10px;
+                padding: 10px;
+                background-color: #f5f5f5;
+                border-radius: 5px;
+            }
+            .keyboard-row {
+                display: flex;
+                margin-bottom: 5px;
+            }
+            .keyboard-key {
+                min-width: 40px;
+                height: 40px;
+                border: 1px solid #ccc;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                margin: 2px;
+                padding: 0 10px;
+                background-color: #fff;
+                border-radius: 3px;
+                font-size: 16px;
+            }
+            .keyboard-key[data-key='backspace'] {
+                width: 60px;
+            }
+        </style>
+    </t>
+</templates>

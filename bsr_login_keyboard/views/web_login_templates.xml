@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="login_layout" inherit_id="web.login" name="Login Page Keyboard">
+        <xpath expr="//div[hasclass('field-login')]" position="after">
+            <div id="keyboard"/>
+        </xpath>
+    </template>
+</odoo>
