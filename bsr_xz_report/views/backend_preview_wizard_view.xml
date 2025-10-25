@@ -14,6 +14,7 @@
                             <group>
                                 <field name="session_id"/>
                                 <field name="report_date"/>
+                                <field name="is_z_report" invisible="1"/>
                             </group>
                         </group>
                         <hr/>
