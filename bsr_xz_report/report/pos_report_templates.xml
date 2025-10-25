@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Z Report View -->
+        <!-- Z Report View (Unchanged) -->
         <record id="view_pos_report_z_form" model="ir.ui.view">
             <field name="name">pos.report.z.form</field>
             <field name="model">pos.report.z</field>
@@ -25,7 +25,7 @@
             </field>
         </record>
 
-        <!-- Report Actions -->
+        <!-- Report Actions with Paperformat -->
         <report
             id="action_report_pos_x"
             model="pos.report.x"
@@ -33,6 +33,7 @@
             report_type="qweb-pdf"
             name="bsr_xz_report.report_pos_x_template"
             file="bsr_xz_report.report_pos_x_template"
+            paperformat="bsr_xz_report.paperformat_receipt"
         />
 
         <report
@@ -42,26 +43,55 @@
             report_type="qweb-pdf"
             name="bsr_xz_report.report_pos_z_template"
             file="bsr_xz_report.report_pos_z_template"
+            paperformat="bsr_xz_report.paperformat_receipt"
         />
+
+        <!-- Shared Receipt Style Template -->
+        <template id="report_receipt_layout">
+            <t t-set="o" t-value="doc.with_context(lang=doc.session_id.user_id.lang)"/>
+            <div class="page" style="font-family: 'Lucida Console', Monaco, monospace; font-size: 12px; max-width: 80mm; margin: 0; padding: 10px;">
+                <div style="text-align: center;">
+                    <h2 style="margin: 0;"><t t-esc="doc.name"/></h2>
+                    <p style="margin: 0;"><strong>Session:</strong> <span t-field="doc.session_id.name"/></p>
+                    <p style="margin: 0;" t-if="doc._name == 'pos.report.z'"><strong>Start:</strong> <span t-field="doc.start_date" t-options='{"widget": "datetime"}'/></p>
+                    <p style="margin: 0;" t-if="doc._name == 'pos.report.z'"><strong>End:</strong> <span t-field="doc.end_date" t-options='{"widget": "datetime"}'/></p>
+                    <p style="margin: 0;" t-if="doc._name == 'pos.report.x'"><strong>Report Date:</strong> <span t-field="doc.end_date" t-options='{"widget": "datetime"}'/></p>
+                </div>
+                <hr/>
+                <table style="width: 100%; font-size: 12px;">
+                    <tr>
+                        <td>Total Sales:</td>
+                        <td style="text-align: right;"><span t-esc="doc.total_sales" t-options='{"widget": "monetary", "display_currency": doc.session_id.currency_id}'/></td>
+                    </tr>
+                    <tr>
+                        <td>Total Returns:</td>
+                        <td style="text-align: right;"><span t-esc="doc.total_returns" t-options='{"widget": "monetary", "display_currency": doc.session_id.currency_id}'/></td>
+                    </tr>
+                     <tr>
+                        <td>Net Sales:</td>
+                        <td style="text-align: right;"><span t-esc="doc.net_sales" t-options='{"widget": "monetary", "display_currency": doc.session_id.currency_id}'/></td>
+                    </tr>
+                    <tr>
+                        <td>Total Taxes:</td>
+                        <td style="text-align: right;"><span t-esc="doc.total_taxes" t-options='{"widget": "monetary", "display_currency": doc.session_id.currency_id}'/></td>
+                    </tr>
+                    <tr>
+                        <td>Total Discounts:</td>
+                        <td style="text-align: right;"><span t-esc="doc.total_discounts" t-options='{"widget": "monetary", "display_currency": doc.session_id.currency_id}'/></td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: 1px solid black; padding-top: 5px;"><strong>Total Payments:</strong></td>
+                        <td style="border-top: 1px solid black; padding-top: 5px; text-align: right;"><strong><span t-esc="doc.total_payments" t-options='{"widget": "monetary", "display_currency": doc.session_id.currency_id}'/></strong></td>
+                    </tr>
+                </table>
+            </div>
+        </template>
 
         <!-- X Report Template -->
         <template id="report_pos_x_template">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
-                    <t t-call="web.external_layout">
-                        <div class="page">
-                            <h1>X Report</h1>
-                            <p><strong>Session:</strong> <span t-field="doc.session_id.name"/></p>
-                            <p><strong>Report Date:</strong> <span t-field="doc.end_date"/></p>
-                            <hr/>
-                            <p><strong>Total Sales:</strong> <span t-field="doc.total_sales"/></p>
-                            <p><strong>Total Payments:</strong> <span t-field="doc.total_payments"/></p>
-                            <p><strong>Total Taxes:</strong> <span t-field="doc.total_taxes"/></p>
-                            <p><strong>Total Discounts:</strong> <span t-field="doc.total_discounts"/></p>
-                            <p><strong>Total Returns:</strong> <span t-field="doc.total_returns"/></p>
-                            <p><strong>Net Sales:</strong> <span t-field="doc.net_sales"/></p>
-                        </div>
-                    </t>
+                    <t t-call="bsr_xz_report.report_receipt_layout"/>
                 </t>
             </t>
         </template>
@@ -70,21 +100,7 @@
         <template id="report_pos_z_template">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
-                    <t t-call="web.external_layout">
-                        <div class="page">
-                            <h1>Z Report</h1>
-                            <p><strong>Session:</strong> <span t-field="doc.session_id.name"/></p>
-                            <p><strong>Start Date:</strong> <span t-field="doc.start_date"/></p>
-                            <p><strong>End Date:</strong> <span t-field="doc.end_date"/></p>
-                            <hr/>
-                            <p><strong>Total Sales:</strong> <span t-field="doc.total_sales"/></p>
-                            <p><strong>Total Payments:</strong> <span t-field="doc.total_payments"/></p>
-                            <p><strong>Total Taxes:</strong> <span t-field="doc.total_taxes"/></p>
-                            <p><strong>Total Discounts:</strong> <span t-field="doc.total_discounts"/></p>
-                            <p><strong>Total Returns:</strong> <span t-field="doc.total_returns"/></p>
-                            <p><strong>Net Sales:</strong> <span t-field="doc.net_sales"/></p>
-                        </div>
-                    </t>
+                     <t t-call="bsr_xz_report.report_receipt_layout"/>
                 </t>
             </t>
         </template>

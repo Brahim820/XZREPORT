@@ -11,6 +11,7 @@
     'depends': ['point_of_sale'],
     'data': [
         'security/ir.model.access.csv',
+        'report/paper_format.xml',
         'report/pos_report_templates.xml',
     ],
     'installable': True,
