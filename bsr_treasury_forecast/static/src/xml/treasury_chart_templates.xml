@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="TreasuryChart" owl="1">
+        <div>
+            <canvas class="o_treasury_chart"/>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Treasury Forecast Form View -->
+        <record id="view_treasury_forecast_form" model="ir.ui.view">
+            <field name="name">treasury.forecast.form</field>
+            <field name="model">treasury.forecast</field>
+            <field name="arch" type="xml">
+                <form string="Treasury Forecast">
+                    <header>
+                        <button name="calculate_forecast" string="Calculate Forecast" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <notebook>
+                            <page string="Forecast Lines">
+                                <field name="line_ids">
+                                    <tree string="Forecast Lines" editable="bottom">
+                                        <field name="date"/>
+                                        <field name="description"/>
+                                        <field name="amount"/>
+                                        <field name="balance"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Treasury Forecast Tree View -->
+        <record id="view_treasury_forecast_tree" model="ir.ui.view">
+            <field name="name">treasury.forecast.tree</field>
+            <field name="model">treasury.forecast</field>
+            <field name="arch" type="xml">
+                <tree string="Treasury Forecasts">
+                    <field name="name"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Treasury Forecast Search View -->
+        <record id="view_treasury_forecast_search" model="ir.ui.view">
+            <field name="name">treasury.forecast.search</field>
+            <field name="model">treasury.forecast</field>
+            <field name="arch" type="xml">
+                <search string="Search Treasury Forecasts">
+                    <field name="name"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Treasury Forecast Graph View -->
+        <record id="view_treasury_forecast_graph" model="ir.ui.view">
+            <field name="name">treasury.forecast.graph</field>
+            <field name="model">treasury.forecast.line</field>
+            <field name="arch" type="xml">
+                <graph string="Treasury Forecast" type="line">
+                    <field name="date" type="row"/>
+                    <field name="balance" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Treasury Forecast Action -->
+        <record id="action_treasury_forecast" model="ir.actions.act_window">
+            <field name="name">Treasury Forecasts</field>
+            <field name="res_model">treasury.forecast</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_treasury_forecast_line_graph" model="ir.actions.act_window">
+            <field name="name">Treasury Forecast Graph</field>
+            <field name="res_model">treasury.forecast.line</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_treasury_forecast_graph"/>
+        </record>
+
+        <menuitem id="menu_treasury_forecast_graph" name="Treasury Forecast Graph" parent="menu_treasury_root" action="action_treasury_forecast_line_graph" sequence="20"/>
+
+        <!-- Menu Items -->
+        <menuitem id="menu_treasury_root" name="Treasury" sequence="10"/>
+        <menuitem id="menu_treasury_forecast" name="Treasury Forecasts" parent="menu_treasury_root" action="action_treasury_forecast" sequence="10"/>
+
+    </data>
+</odoo>
